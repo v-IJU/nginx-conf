@@ -1,0 +1,54 @@
+# To replace the default NGINX config with your own custom configuration, follow these steps:
+
+sudo unlink /etc/nginx/sites-enabled/default
+
+
+✅ 2. Create Your Own Config File
+Create a new config file in /etc/nginx/sites-available/:
+
+sudo nano /etc/nginx/sites-available/mydomain.conf
+
+
+Paste your custom NGINX configuration. Here's an example for a basic Laravel site:
+
+# with ssl setup
+
+server {
+    listen 80;
+    server_name dev.example.com;
+
+    return 301 https://$host$request_uri;
+}
+
+
+server{
+        listen 443 ssl;
+    server_name dev.example.com;
+    ssl_certificate /etc/nginx/ssl/dev.{domain}.com.chained.crt;
+    ssl_certificate_key /etc/nginx/ssl/generated-private-key.txt;
+
+    root /var/www/{folder_name}/public;
+
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+        client_max_body_size 100M;
+        error_page 404 /index.php;
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+
+     }
+
+}
+
+
+
+#Link to Sites-Enabled
+✅ Create a symbolic link from sites-available to sites-enabled:
+
+sudo ln -s /etc/nginx/sites-available/mydomain.conf /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
