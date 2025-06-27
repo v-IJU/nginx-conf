@@ -1,0 +1,10 @@
+cd /path/to/your/laravel/project
+
+# Set correct ownership
+sudo chown -R www-data:www-data storage bootstrap/cache
+
+# Set directory permissions
+sudo find storage bootstrap/cache -type d -exec chmod 775 {} \;
+
+# Set file permissions
+sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
