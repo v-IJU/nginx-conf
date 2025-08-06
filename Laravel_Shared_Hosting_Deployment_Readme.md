@@ -73,6 +73,31 @@ Options -Indexes
 ```
 
 ---
+## 📜 Fix: Set Correct Permissions Inside public/ Subfolders
+
+```
+# Set directories inside public to 755
+find public/ -type d -exec chmod 755 {} \;
+
+# Set files inside public to 644
+find public/ -type f -exec chmod 644 {} \;
+
+```
+## 📜 Set group sticky permission (so new files are writable) For logs
+
+```
+find storage -type d -exec chmod g+s {} \;
+
+```
+
+##🔁 Set up a cron to fix permissions daily (for shared hosting) Optional
+
+#If you’re on shared hosting and daily logs are still created with bad permissions, add this daily cron job in cPanel:
+
+```
+find /home/YOUR_CPANL_USER/public_html/storage/logs -type f -exec chmod 664 {} \;
+
+```
 
 ## ⚙️ Check PHP Version
 
