@@ -13,6 +13,13 @@ AWS account.
 
 ## Step-by-Step Migration
 
+### ec2 to local machine current directory
+
+    ```
+    scp -i /path/to/key.pem ec2-user@<EC2_PUBLIC_IP_OR_DNS>:/remote/path/to/file .
+    
+    ```
+
 ### 1. Create an AMI from the Old EC2
 
 -   Go to EC2 dashboard \> Instances \> Select instance \> Actions \>
