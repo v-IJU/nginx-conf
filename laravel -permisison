@@ -13,3 +13,15 @@ sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
 sudo chown -R www-data:www-data storage bootstrap/cache
 sudo find storage -type d -exec chmod 775 {} \;
 sudo find storage -type f -exec chmod 664 {} \;
+
+
+#for log permisison issues 
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R 775 storage bootstrap/cache
+'daily' => [
+    'driver' => 'daily',
+    'path' => storage_path('logs/laravel.log'),
+    'level' => 'debug',
+    'days' => 14,
+    'permission' => 0664,  // <--- add this line
+],
