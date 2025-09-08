@@ -41,6 +41,26 @@ A direct connection is **not ideal** for security or configuration.
 
 ---
 
+## Install Required Packages
+
+```
+
+# Install the websockets package
+composer require beyondcode/laravel-websockets
+
+# Install the Pusher PHP SDK (used as the driver)
+composer require pusher/pusher-php-server
+
+```
+
+## Publish and Configure
+
+```
+php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"
+php artisan migrate
+```   
+
 ## 🔹 Configuration Breakdown
 
 ### 1. React Client (`echo.js`)
