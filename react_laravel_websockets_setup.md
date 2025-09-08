@@ -181,6 +181,12 @@ stderr_logfile=/var/log/supervisor/websockets-stderr.log
 
 Run this command on your server to restart the process: sudo supervisorctl restart websockets
 
+### 6. Let the Package Generate Them create Secret and App key For pusher 
+
+```
+php artisan websockets:secret
+```
+
 ## ✅ Final Notes
 - React connects via **wss://multibranch.raregroup.info:443**
 - Cloudflare handles SSL termination
