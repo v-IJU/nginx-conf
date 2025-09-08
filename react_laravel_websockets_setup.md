@@ -166,7 +166,9 @@ autorestart=true
 stdout_logfile=/var/log/supervisor/websockets-stdout.log
 stderr_logfile=/var/log/supervisor/websockets-stderr.log
 ```
-
+- sudo supervisorctl reread
+- sudo supervisorctl update
+- sudo supervisorctl start websockets
 ---
 
 ### 4. How to Configure CORS for Laravel WebSockets
