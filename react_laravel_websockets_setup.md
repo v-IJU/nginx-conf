@@ -149,6 +149,38 @@ stderr_logfile=/var/log/supervisor/websockets-stderr.log
 
 ---
 
+### 4. How to Configure CORS for Laravel WebSockets
+
+```
+// config/websockets.php
+
+'apps' => [
+    // ... your app configuration
+],
+
+/*
+ * This array holds the allowed origins that are allowed to connect to the websockets server.
+ * Keep this empty to allow all origins. Or specify the origins you want to allow.
+ */
+'allowed_origins' => [
+    // Add your React app's local development server URL
+    'http://localhost:5173',  // Common for Vite
+    'http://localhost:3000',  // Common for Create React App
+
+    // Add your production React app's domain
+    // Replace this with your actual production domain
+    'https://your-production-react-app.com', 
+],
+
+// ... rest of the file
+```
+
+### 5. Restart the WebSocket Server
+
+- The WebSocket server process itself loads the configuration when it starts. Since it's a long-running process managed by Supervisor, it won't see the changes until it's restarted.
+
+Run this command on your server to restart the process: sudo supervisorctl restart websockets
+
 ## ✅ Final Notes
 - React connects via **wss://multibranch.raregroup.info:443**
 - Cloudflare handles SSL termination
