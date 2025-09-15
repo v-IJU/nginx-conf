@@ -203,6 +203,13 @@ stderr_logfile=/var/log/supervisor/websockets-stderr.log
 
 Run this command on your server to restart the process: sudo supervisorctl restart websockets
 
+### Indiviual Start Worker
+
+```
+sudo supervisorctl start queue-worker-default:*
+sudo supervisorctl start queue-worker-realtime:*
+```
+
 ### 6. Let the Package Generate Them create Secret and App key For pusher 
 
 ```
