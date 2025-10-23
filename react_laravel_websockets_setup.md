@@ -223,3 +223,23 @@ php artisan websockets:secret
 - Supervisor ensures the WebSocket server is always running
 
 This setup ensures a **secure, reliable, and production-ready WebSocket architecture** with React + Laravel.
+
+### 7. if you are using GOLDEN AMI for autoscale stop This process because unnessacery process live jobs if you are use SQS
+
+# 1️⃣ Stop all Supervisor processes
+sudo systemctl stop supervisor
+
+# 2️⃣ Verify it’s stopped
+sudo systemctl status supervisor
+# Should show: inactive (dead)
+
+# 3️⃣ Optional (clean logs)
+sudo truncate -s 0 /var/www/florist_multibranch/storage/logs/worker.log
+sudo truncate -s 0 /var/www/florist_multibranch/storage/logs/queue-realtime.log
+sudo truncate -s 0 /var/www/florist_multibranch/storage/logs/laravel.log
+
+# Check Superviours enabled in this Golden Server If enable means when new instance lauch auto restart all workers
+
+sudo systemctl is-enabled supervisor
+sudo systemctl enable supervisor
+
