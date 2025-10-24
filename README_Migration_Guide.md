@@ -36,7 +36,7 @@ mysqldump -u root -p your_database > backup.sql
 ### 3. Transfer Backup to New DB Server
 
 ``` bash
-scp backup.sql ec2-user@<new-db-private-ip>:/tmp/
+scp -i /path/to/your-key.pem backup.sql ec2-user@<NEW-DB-PRIVATE-IP>:/tmp/
 ```
 
 ### 4. Restore Backup on New DB Server
