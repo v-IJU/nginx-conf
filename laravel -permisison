@@ -25,3 +25,7 @@ sudo chmod -R 775 storage bootstrap/cache
     'days' => 14,
     'permission' => 0664,  // <--- add this line
 ],
+
+#after storage link unisharp filemanager if images showing 404
+
+sudo chown -h wbdev:wbdev public/storage
