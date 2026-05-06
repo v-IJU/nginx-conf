@@ -1,0 +1,30 @@
+# Rebuild without cache
+docker build --no-cache -t server-app:latest .
+
+# Verify migrations are in image
+docker run --rm server-app:latest ls -la prisma/migrations/
+
+# Should show migration files now ✅
+
+  # Commit .dockerignore fix
+git add .dockerignore
+git commit -m "fix: include prisma migrations in docker build"
+git push origin development
+
+# Or manually push image
+docker tag server-app:latest registry.gitlab.com/production-erp/server:{branch}
+docker push registry.gitlab.com/production-erp/server:{branch}
+
+# On VPS
+cd /home/wbdev/sbs_webbazaardevelopment_com
+docker compose -f docker-compose.dev.yml pull
+docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.dev.yml up -d
+
+sleep 10
+
+# Check migrations are there
+docker compose -f docker-compose.dev.yml exec -T app ls -la prisma/migrations/
+
+# Run migration
+docker compose -f docker-compose.dev.yml exec -T app npx prisma migrate deploy
