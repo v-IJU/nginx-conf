@@ -189,8 +189,9 @@ git commit -m "Build assets for production"
 git push origin main
 
 # PRODUCTION SERVER
-git pull origin main
-# ❌ DO NOT run: npm install or npm run dev
+git pull origin <branch>
+npm install
+# ❌ DO NOT run: npm run dev
 # ✅ Just use the compiled files that were pushed
 # Assets are already in public/ folder from your local build
 ```
@@ -201,7 +202,7 @@ git pull origin main
 ❌ BAD (runs npm on server):
 Server:
   git pull
-  npm install              ← Installs 100MB+ of node_modules
+  
   npm run production       ← Compiles (slow, CPU intensive)
   ✓ Server now has node_modules and compiled assets
   Problem: Wastes disk space, slow deployment, security risk
@@ -367,13 +368,13 @@ Remove these lines:
 /public/mix-manifest.json  ← Remove this
 ```
 
-### Step 2: Remove node_modules and public/js from git history
+### Step 2: Remove  public/js from git history
 
 ```bash
 # On your local machine
 git rm -r --cached public/js
 git rm -r --cached public/mix-manifest.json
-git rm -r --cached node_modules
+
 git commit -m "Remove build artifacts from git"
 git push
 ```
@@ -417,13 +418,13 @@ git pull             # Gets ready-to-use files
 
 | Activity | Local | Production |
 |----------|-------|-----------|
-| **Run npm install?** | ✅ Yes (first time) | ❌ No (not needed) |
+| **Run npm install?** | ✅ Yes (first time) | YES |
 | **Run npm run dev?** | ✅ Yes (while coding) | ❌ Never |
 | **Run npm run watch?** | ✅ Yes (while coding) | ❌ No |
 | **Run npm run production?** | ✅ Yes (before commit) | ❌ No (already compiled) |
 | **Commit public/js?** | ✅ Yes | N/A |
 | **Have public/js files?** | ✅ Yes | ✅ Yes |
-| **Have node_modules?** | ✅ Yes | ❌ No |
+| **Have node_modules?** | ✅ Yes | YES |
 | **Disk usage** | ~500MB | ~2MB for assets |
 | **Deployment time** | N/A | ~10 seconds |
 
@@ -502,7 +503,7 @@ git push
 ### Server Deployment:
 ```bash
 git pull                ← That's it!
-# No npm install needed
+
 # No npm run dev needed
 # Assets already compiled and ready
 ```
@@ -573,9 +574,10 @@ git push
 
 # 1. Pull latest code
 git pull
+npm install
 
 # 2. That's it! 🎉
-# No npm install
+
 # No npm run anything
 # Just serve the public/ files that are already there
 ```
