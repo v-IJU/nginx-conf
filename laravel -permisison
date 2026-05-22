@@ -9,10 +9,14 @@ sudo find storage bootstrap/cache -type d -exec chmod 775 {} \;
 # Set file permissions
 sudo find storage bootstrap/cache -type f -exec chmod 664 {} \;
 
+sudo chmod -R 775 bootstrap/cache
 
-sudo chown -R www-data:www-data storage bootstrap/cache
+For webbazaar server
+==============================
+sudo chown -R wpdev:wpdev storage bootstrap/cache
 sudo find storage -type d -exec chmod 775 {} \;
 sudo find storage -type f -exec chmod 664 {} \;
+sudo chmod -R 775 bootstrap/cache
 
 
 #for log permisison issues 
